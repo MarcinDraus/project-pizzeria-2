@@ -93,8 +93,12 @@
         
         if(activeProduct !== null){
           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
-        }if(activeProduct !== activeProduct){
+        }else if (activeProduct !== activeProduct ){
           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+        }
+        const activeElements = document.querySelectorAll('.product');
+        for(let activeElement of activeElements){
+          activeElement.classList.remove('active');
         }
         /* toggle active class on thisProduct.element */
         //document.querySelectorAll(select.menuProduct.clickable);
