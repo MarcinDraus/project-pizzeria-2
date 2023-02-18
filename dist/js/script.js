@@ -64,7 +64,7 @@
       const thisProduct = this;
       /*generate HTML based on template*/
       const generatedHTML = templates.menuProduct(thisProduct.data);
-      console.log(generatedHTML);
+      //console.log(generatedHTML);
       /*create element using utils.createElementFromHTML*/
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
       /*find menu container*/
@@ -72,26 +72,37 @@
       /*add element to menu*/
       menuContainer.appendChild(thisProduct.element);
     }
-  }
-  initAccordion(){
-    const thisProduct = this;
+  
+    initAccordion(){
+      const thisProduct = this;
+      /* find the clickable trigger (the element that should react to clicking) */
+      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
 
-    /* find the clickable trigger (the element that should react to clicking) */
-    const clickableTrigger = ;
-
-    /* START: add event listener to clickable trigger on event click */
-    clickableTrigger.addEventListener('click', function(event) {
+      /* START: add event listener to clickable trigger on event click */
+      clickableTrigger.addEventListener('click', function(event) {
       /* prevent default action for event */
-
-      /* find active product (product that has active class) */
-
-      /* if there is active product and it's not thisProduct.element, remove class active from it */
-
-      /* toggle active class on thisProduct.element */
-    });
-
+        event.preventDefault(); 
+        /* find active product (product that has active class) */
+        const activeProduct = /*document.querySelectorAll*/thisProduct.element.querySelector(select.all.menuProductsActive);
+        /* if there is active product and it's not thisProduct.element, remove class active from it */
+        // if(activeProduct !== null){
+        //   activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+        // }else if(activeProduct !== thisProduct.element){
+        //   activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+        // }
+        
+        if(activeProduct !== null){
+          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+        }if(activeProduct !== activeProduct){
+          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+        }
+        /* toggle active class on thisProduct.element */
+        //document.querySelectorAll(select.menuProduct.clickable);
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+      });
+    }
   }
-}
+
   const app = {
     initData: function(){
       const thisApp = this;
@@ -117,8 +128,8 @@
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
-     thisApp.initData();
-     thisApp.initMenu(); 
+      thisApp.initData();
+      thisApp.initMenu(); 
     },
   };
   app.init();
