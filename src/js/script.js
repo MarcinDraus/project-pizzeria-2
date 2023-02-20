@@ -152,13 +152,15 @@
         
         if(activeProduct !== null){
           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
-        }if (activeProduct !== activeProduct ){
+        }if (activeProduct !== activeProduct){
           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+        // eslint-disable-next-line no-empty
+        }else {
         }
-        const activeElements = document.querySelectorAll('.product');
-        for(let activeElement of activeElements){
-          activeElement.classList.remove('active');
-        }
+        // const activeElements = document.querySelectorAll('.product');
+        // for(let activeElement of activeElements){
+        //   activeElement.classList.remove('active');
+        // }
         /* toggle active class on thisProduct.element */
         //document.querySelectorAll(select.menuProduct.clickable);
         thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
