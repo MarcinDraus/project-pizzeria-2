@@ -142,27 +142,13 @@
         /* prevent default action for event */
         event.preventDefault(); 
         /* find active product (product that has active class) */
-        const activeProduct = /*document.querySelectorAll*/thisProduct.element.querySelector(select.all.menuProductsActive);
-        /* if there is active product and it's not thisProduct.element, remove class active from it */
-        // if(activeProduct !== null){
-        //   activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
-        // }else if(activeProduct !== thisProduct.element){
-        //   activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
-        // }
-        
-        if(activeProduct !== null){
+        const activeProduct = /*thisProduct.element.*/document.querySelector(select.all.menuProductsActive);
+              
+        if(activeProduct && activeProduct !== thisProduct.element) {
           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
-        }if (activeProduct !== activeProduct){
-          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
-        // eslint-disable-next-line no-empty
-        }else {
         }
-        // const activeElements = document.querySelectorAll('.product');
-        // for(let activeElement of activeElements){
-        //   activeElement.classList.remove('active');
-        // }
+
         /* toggle active class on thisProduct.element */
-        //document.querySelectorAll(select.menuProduct.clickable);
         thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
       });
     }
