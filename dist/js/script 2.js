@@ -125,33 +125,13 @@
           const option = param.options[optionId];
           console.log(optionId, option);
           // check if there is param with a name of paramId in formData and if it includes optionId
-          //if(formData[paramId] && formData[paramId].includes(optionId)) {
-          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
-          // find image by class paramId-optionId
-          const optionImage = document.querySelector(`.${paramId}-${optionId}`);/*thisProduct.imageWrapper.querySelector ('.' + paramId + '-' + optionId);*/
-          console.log('optionImage', optionImage);
-          //image from DataSource.products.images
-          if(optionImage){
-            //includes in param.options[optionId]
-            if(optionSelected){
-              //Image add class active
-              optionImage.classList.add(classNames.menuProduct.imageVisible);
-            } else{
-              //Image remove class active
-              optionImage.classList.remove(classNames.menuProduct.imageVisible);
-            } 
-          // eslint-disable-next-line no-empty
-          }else{
-            
-          }
-          if(optionSelected){
-          // check if the option is not default
+          if(formData[paramId] && formData[paramId].includes(optionId)) {
+            // check if the option is not default
             if(!option.default){
-            // add option price to price variable
+              // add option price to price variable
               price += option.price;
             }
-          }
-          //} 
+          } 
           else{
             // check if the option is default
             if(option.default){
