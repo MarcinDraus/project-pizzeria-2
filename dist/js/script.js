@@ -58,10 +58,13 @@
       thisProduct.data = data;
       thisProduct.renderInMenu();
       thisProduct.getElements();
-      thisProduct.initOrderForm();
-      thisProduct.processOrder();
       thisProduct.initAccordion();
+      thisProduct.initOrderForm();
+      thisProduct.initAmountWidget();
+      thisProduct.processOrder();
+     
       console.log('new Product:', thisProduct);
+      
     }
     renderInMenu(){
       const thisProduct = this;
@@ -77,13 +80,36 @@
     }
     getElements(){
       const thisProduct = this;
-    
+      
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.AmountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
+    }
+    initAccordion(){
+      const thisProduct = this;
+      /* find the clickable trigger (the element that should react to clicking) */
+      //const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+
+      /* START: add event listener to clickable trigger on event click */
+      thisProduct.accordionTrigger.addEventListener('click', function(event) {
+      //clickableTrigger.addEventListener('click', function(event) {
+
+        /* prevent default action for event */
+        event.preventDefault(); 
+        /* find active product (product that has active class) */
+        const activeProduct = document.querySelector(select.all.menuProductsActive);
+              
+        if(activeProduct && activeProduct !== thisProduct.element) {
+          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+        }
+
+        /* toggle active class on thisProduct.element */
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+      });
     }
     initOrderForm(){
       const thisProduct = this;
@@ -104,6 +130,16 @@
         thisProduct.processOrder();
       });
     }
+    initAmountWidget(){
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.AmountWidgetElem);
+      /* Nasłuchiwanie eventu. Drugą częścią informowania produktu, jak już wspomnieliśmy, jest nasłuchiwanie tego eventu w klasie Product. Co bowiem z tego, że event updated*/
+      thisProduct.amountWidgetElem.addEventListener('updated', () => {
+        thisProduct.processOrder();
+      });
+    }
+
     processOrder(){
       const thisProduct = this;
       console.log('processOrder', this.processOrder);
@@ -161,33 +197,13 @@
           }
         }
       }
-
+      //  multiply price by amount 
+      price *= thisProduct.amountWidget.value;
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
     
-    initAccordion(){
-      const thisProduct = this;
-      /* find the clickable trigger (the element that should react to clicking) */
-      //const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-
-      /* START: add event listener to clickable trigger on event click */
-      thisProduct.accordionTrigger.addEventListener('click', function(event) {
-      //clickableTrigger.addEventListener('click', function(event) {
-
-        /* prevent default action for event */
-        event.preventDefault(); 
-        /* find active product (product that has active class) */
-        const activeProduct = document.querySelector(select.all.menuProductsActive);
-              
-        if(activeProduct && activeProduct !== thisProduct.element) {
-          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
-        }
-
-        /* toggle active class on thisProduct.element */
-        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
-      });
-    }
+    
   }
 
   const app = {
@@ -217,5 +233,59 @@
       thisApp.initMenu(); 
     },
   };
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
+      thisWidget.getElements(element);
+      /*Gdy produkt generuje swój HTML, to w inpucie od razu wstawia nam domyślną wartość.Chodzi o to, żeby nawet na samym starcie, kiedy nikt jeszcze nie zmienił wartości w inpucie, nasza instancja miała już informację co w tym inpucie jest */
+      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.initActions();
+      console.log('AmountWidget:', thisWidget);
+      console.log('constructor arguments:', element);
+    }
+    getElements(element){
+      const thisWidget = this;
+    
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+    setValue(value){
+      const thisWidget = this;
+      const newValue = parseInt(value);
+      thisWidget.value = settings.amountWidget.defaultValue;
+      /*TODO: Add validation*/
+      /*żeby nasza funkcja ustalała, czy to co wpisano w input jest faktycznie liczbą,newValue nie jest też null-em*/
+      if(thisWidget.value !== newValue && !isNaN(newValue)&& newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
+        thisWidget.value = newValue;
+      }
+      thisWidget.input.value = thisWidget.value;
+      thisWidget.announce();
+    }
+
+    initActions(){
+      const thisWidget = this;
+      thisWidget.input.addEventListener('change', () => {
+        thisWidget.setValue(thisWidget.input.value);
+      });
+      thisWidget.linkDecrease.addEventListener('click', (event)=> {
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.input.value - 1);
+      });
+      thisWidget.linkIncrease.addEventListener('click', (event)=>{
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value + 1);
+      });
+
+    }
+    announce(){
+      const thisWidget = this;
+
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
+    }
+  }
+  
   app.init();
 }
