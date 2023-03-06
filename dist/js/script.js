@@ -44,7 +44,7 @@
     amountWidget: {
       defaultValue: 1,
       defaultMin: 1,
-      defaultMax: 9,
+      defaultMax: 10,
     }
   };
 
@@ -87,7 +87,7 @@
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-      thisProduct.AmountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
     initAccordion(){
       const thisProduct = this;
@@ -132,8 +132,8 @@
     }
     initAmountWidget(){
       const thisProduct = this;
-
-      thisProduct.amountWidget = new AmountWidget(thisProduct.AmountWidgetElem);
+     
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
       /* Nasłuchiwanie eventu. Drugą częścią informowania produktu, jak już wspomnieliśmy, jest nasłuchiwanie tego eventu w klasie Product. Co bowiem z tego, że event updated*/
       thisProduct.amountWidgetElem.addEventListener('updated', () => {
         thisProduct.processOrder();
@@ -258,7 +258,7 @@
       /*TODO: Add validation*/
       /*żeby nasza funkcja ustalała, czy to co wpisano w input jest faktycznie liczbą,newValue nie jest też null-em*/
       if(thisWidget.value !== newValue && !isNaN(newValue)&& newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
-        thisWidget.value = newValue;
+        thisWidget.value = newValue;/*Ilość produktów bedziemy mieli min 1, max 9*/
       }
       thisWidget.input.value = thisWidget.value;
       thisWidget.announce();
