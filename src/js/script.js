@@ -319,7 +319,36 @@
       console.log(generatedDOM);
       
       thisCart.dom.productList.appendChild(generatedDOM);
+      
+      //Jeśli każdorazowo przy dodawaniu produktu do koszyka, będziemy zapisywać obiekt jego podsumowania do tablicy thisCart.products, to będzie ona dla nas swego rodzaju podsumowaniem. Kiedy tylko będziemy mieli taką ochotę, będziemy mogli wejść do tej tablicy i sprawdzić, jakie aktualnie elementy są w naszym koszyku, włącznie z dokładnymi informacjami na ich temat, takich jak cena czy liczba sztuk.
+      thisCart.products.push(menuProduct);
+      console.log('thisCart.products', thisCart.products); 
     }
+  }
+  class CartProduct{
+    constructor(menuProduct, element){
+      const thisCartProduct = this;
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.amount = menuProduct.amount;
+      thisCartProduct.price = menuProduct.price;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.params = menuProduct.params;
+      
+      getElemets(element){
+      const thisCartProduct = this;
+      thisCartProduct.dom = {};
+      thisCartProduct.dom.wrapper = element;
+      thisCartProduct.dom = 
+
+          
+      }
+      
+
+      console.log('thisCartProduct', thisCartProduct)
+    }
+
+
   }
 
   const app = {
@@ -411,7 +440,6 @@
       thisWidget.element.dispatchEvent(event);
     }
   }
-
+  
   app.init();
 }
-

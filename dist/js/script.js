@@ -290,7 +290,7 @@
       thisCart.getElements(element);
       // wysówa menu  koszyk z zamówieniem order
       thisCart.initActions();
-      //console.log('new Cart', thisCart);
+      console.log('new Cart', thisCart);
     }
     getElements(element){
       const thisCart = this;
@@ -299,7 +299,7 @@
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       //9.4. Dodawanie produktów do koszyka,  kliknięcie buttona "ADD TO CART" powinno wyświetlać produkt w koszyku!– powinien być równy odpowiedniemu elementowi z HTML-a. Dokładnie liście produktów.
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
-      console.log(thisCart.dom.productList);
+      //console.log(thisCart.dom.productList);
     }
     initActions(){
       const thisCart = this;
@@ -310,15 +310,60 @@
     add(menuProduct){
       const thisCart = this;
 
-      console.log('adding product', menuProduct);
+      //console.log('adding product', menuProduct);
 
       const generatedHTML = templates.cartProduct(menuProduct);
       //console.log('html cart', generatedHTML);
       
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-      console.log(generatedDOM);
+      //console.log(generatedDOM);
       
       thisCart.dom.productList.appendChild(generatedDOM);
+      
+      //Jeśli każdorazowo przy dodawaniu produktu do koszyka, będziemy zapisywać obiekt jego podsumowania do tablicy thisCart.products, to będzie ona dla nas swego rodzaju podsumowaniem. Kiedy tylko będziemy mieli taką ochotę, będziemy mogli wejść do tej tablicy i sprawdzić, jakie aktualnie elementy są w naszym koszyku, włącznie z dokładnymi informacjami na ich temat, takich jak cena czy liczba sztuk.
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+      //console.log('thisCart.products', thisCart.products); 
+    }
+  }
+  class CartProduct{
+    constructor(menuProduct, element) {
+      const thisCartProduct = this;
+  
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.amount = menuProduct.amount;
+      thisCartProduct.price = menuProduct.price;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.params = menuProduct.params;
+  
+      thisCartProduct.getElements(element);
+      thisCartProduct.AmountWidget();
+      
+      console.log('new CartProduct', thisCartProduct);
+    }
+    getElements(element){
+      const thisCartProduct = this;
+      thisCartProduct.dom = {};
+  
+      thisCartProduct.dom.wrapper = element;
+      console.log(thisCartProduct.dom.wrapper);
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+    }
+    AmountWidget(){
+      const thisCartProduct = this;
+     
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+      /* Nasłuchiwanie eventu. Drugą częścią informowania produktu, jak już wspomnieliśmy, jest nasłuchiwanie tego eventu w klasie Product. Co bowiem z tego, że event updated*/
+      thisCartProduct.dom.amountWidget.addEventListener('updated', () => {
+        thisCartProduct.amount = thisCartProduct.amountWidget;
+        thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount.value;
+        // console.log(thisCartProduct.amount.value);
+        // console.log(thisCartProduct.price);
+        thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+      });
     }
   }
 
@@ -411,7 +456,6 @@
       thisWidget.element.dispatchEvent(event);
     }
   }
-
+  
   app.init();
 }
-
