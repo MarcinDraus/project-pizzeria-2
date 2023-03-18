@@ -300,12 +300,25 @@
       //9.4. Dodawanie produktów do koszyka,  kliknięcie buttona "ADD TO CART" powinno wyświetlać produkt w koszyku!– powinien być równy odpowiedniemu elementowi z HTML-a. Dokładnie liście produktów.
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
       //console.log(thisCart.dom.productList);
+      //DOM elements for cart total, subtotal, delivery fee
+      thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(select.cart.deliveryFee);
+      thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
+      thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
+      thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
     }
+    
     initActions(){
       const thisCart = this;
       thisCart.dom.toggleTrigger.addEventListener('click', ()=> {
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
+      thisCart.dom.productList.addEventListener('updated', function(){
+        thisCart.update();
+      });
+      thisCart.dom.productList.addEventListener('remove', function(event){
+        thisCart.remove(event.detail.cartProduct);
+      });
+      
     }
     add(menuProduct){
       const thisCart = this;
@@ -323,6 +336,41 @@
       //Jeśli każdorazowo przy dodawaniu produktu do koszyka, będziemy zapisywać obiekt jego podsumowania do tablicy thisCart.products, to będzie ona dla nas swego rodzaju podsumowaniem. Kiedy tylko będziemy mieli taką ochotę, będziemy mogli wejść do tej tablicy i sprawdzić, jakie aktualnie elementy są w naszym koszyku, włącznie z dokładnymi informacjami na ich temat, takich jak cena czy liczba sztuk.
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       //console.log('thisCart.products', thisCart.products); 
+      
+      thisCart.update();
+    }
+    
+    update(){
+      const thisCart = this;
+      const deliveryFee = settings.cart.defaultDeliveryFee;
+      let totalNumber = 0;
+      let subtotalPrice = 0;
+      for (const cartProduct of thisCart.products) {
+        totalNumber += cartProduct.amount;
+        subtotalPrice += cartProduct.price;
+      }
+      if(totalNumber !== 0){
+        thisCart.totalPrice = subtotalPrice + deliveryFee;
+      }
+      //if(totalNumber == 0){ } else {
+      //thisCart.totalPrice = subtotalPrice + deliveryFee;
+      //}
+      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+      thisCart.dom.totalNumber.innerHTML = totalNumber;
+
+      for (let totalPrice of thisCart.dom.totalPrice) {
+        totalPrice.innerHTML = thisCart.totalPrice;
+      }
+    }
+    remove(cartProduct){
+      const thisCart = this;
+      const products = thisCart.products;
+      // remove from html
+      cartProduct.dom.wrapper.remove();
+      const removedProduct = products.indexOf(cartProduct);
+      products.splice(removedProduct, 1);
+      thisCart.update();
     }
   }
   class CartProduct{
@@ -338,6 +386,7 @@
   
       thisCartProduct.getElements(element);
       thisCartProduct.AmountWidget();
+      thisCartProduct.initActions();
       
       console.log('new CartProduct', thisCartProduct);
     }
@@ -363,6 +412,31 @@
         // console.log(thisCartProduct.amount.value);
         // console.log(thisCartProduct.price);
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+      });
+    }
+    remove(){
+      const thisCartProduct = this;
+      const event = new CustomEvent('remove', {
+        bubbles: true,
+        detail: {
+          cartProduct: thisCartProduct,
+        },
+      });
+      thisCartProduct.dom.wrapper.dispatchEvent(event);
+    }
+    initActions(){
+      const thisCartProduct = this;
+
+      thisCartProduct.dom.edit.addEventListener('click', function(bin) {
+        // eslint-disable-next-line no-undef
+        bin.preventDefault();
+      });
+      thisCartProduct.dom.remove.addEventListener('click', function(bin)  {
+        // eslint-disable-next-line no-undef
+        bin.preventDefault();
+        thisCartProduct.remove();
+        // eslint-disable-next-line no-undef
+        console.log(thisCartProduct.remove); 
       });
     }
   }
@@ -452,10 +526,11 @@
     }
     announce(){
       const thisWidget = this;
-      const event = new Event('updated');
+      const event = new CustomEvent('updated', {bubbles: true});
       thisWidget.element.dispatchEvent(event);
     }
   }
-  
+
   app.init();
 }
+console.log("ok", "2"+"2", 2+2);
