@@ -1,6 +1,3 @@
-/* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
-
-/* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 {
   const select = {
     templateOf: {
@@ -173,7 +170,6 @@
         thisProduct.processOrder();
       });
     }
-
     processOrder(){
       const thisProduct = this;
       // console.log('processOrder', this.processOrder);
@@ -277,12 +273,9 @@
     }
     addToCart(){
       const thisProduct = this;
-
       app.cart.add(thisProduct.prepareCartProduct());
     } 
-
   }
-
   class Cart{
     constructor(element){
       const thisCart = this;
@@ -306,7 +299,7 @@
       thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
     }
-    
+
     initActions(){
       const thisCart = this;
       thisCart.dom.toggleTrigger.addEventListener('click', ()=> {
@@ -318,13 +311,11 @@
       thisCart.dom.productList.addEventListener('remove', function(event){
         thisCart.remove(event.detail.cartProduct);
       });
-      
+
     }
     add(menuProduct){
       const thisCart = this;
-
       //console.log('adding product', menuProduct);
-
       const generatedHTML = templates.cartProduct(menuProduct);
       //console.log('html cart', generatedHTML);
       
@@ -336,10 +327,10 @@
       //Jeśli każdorazowo przy dodawaniu produktu do koszyka, będziemy zapisywać obiekt jego podsumowania do tablicy thisCart.products, to będzie ona dla nas swego rodzaju podsumowaniem. Kiedy tylko będziemy mieli taką ochotę, będziemy mogli wejść do tej tablicy i sprawdzić, jakie aktualnie elementy są w naszym koszyku, włącznie z dokładnymi informacjami na ich temat, takich jak cena czy liczba sztuk.
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       //console.log('thisCart.products', thisCart.products); 
-      
+
       thisCart.update();
     }
-    
+
     update(){
       const thisCart = this;
       const deliveryFee = settings.cart.defaultDeliveryFee;
@@ -383,11 +374,11 @@
       thisCartProduct.price = menuProduct.price;
       thisCartProduct.priceSingle = menuProduct.priceSingle;
       thisCartProduct.params = menuProduct.params;
-  
+
       thisCartProduct.getElements(element);
       thisCartProduct.AmountWidget();
       thisCartProduct.initActions();
-      
+
       console.log('new CartProduct', thisCartProduct);
     }
     getElements(element){
@@ -447,7 +438,6 @@
       const cartElem = document.querySelector(select.containerOf.cart);
       thisApp.cart = new Cart(cartElem);
     },
-
     initData: function(){
       const thisApp = this;
       //console.log('thisApp.data:', thisApp.data);
@@ -473,11 +463,8 @@
       thisApp.initData();
       thisApp.initMenu(); 
       thisApp.initCart();
-
     },
-
   };
-
   class AmountWidget{
     constructor(element){
       const thisWidget = this;
@@ -526,11 +513,12 @@
     }
     announce(){
       const thisWidget = this;
+      const event = new Event('updated');
       const event = new CustomEvent('updated', {bubbles: true});
       thisWidget.element.dispatchEvent(event);
     }
   }
+  
 
   app.init();
 }
-console.log("ok", "2"+"2", 2+2);
