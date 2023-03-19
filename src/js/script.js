@@ -330,7 +330,6 @@
 
       thisCart.update();
     }
-
     update(){
       const thisCart = this;
       const deliveryFee = settings.cart.defaultDeliveryFee;
@@ -431,7 +430,6 @@
       });
     }
   }
-
   const app = {
     initCart: function(){
       const thisApp = this;
@@ -450,7 +448,6 @@
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
       }
-      
     },
         
     init: function(){
@@ -518,7 +515,5 @@
       thisWidget.element.dispatchEvent(event);
     }
   }
-  
-
-  app.init();
+    app.init();
 }
