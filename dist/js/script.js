@@ -391,12 +391,12 @@
       const deliveryFee = settings.cart.defaultDeliveryFee;
       thisCart.totalNumber = 0;
       thisCart.subtotalPrice = 0;
-      if (thisCart.products.length == ''){
+      if (thisCart.products.length == 0){
   
-        thisCart.totalPrice = thisCart.subtotalPrice;
+        thisCart.totalPrice = 0;
         thisCart.dom.deliveryFee.innerHTML = 0;
-        thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
-        thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
+        thisCart.dom.subtotalPrice.innerHTML = 0;
+        thisCart.dom.totalNumber.innerHTML = 0;
       } else {
         for (const cartProduct of thisCart.products) {
           thisCart.totalNumber += cartProduct.amount;
@@ -518,11 +518,12 @@
       thisCartProduct.amountWidget = new AmountWidget(
         thisCartProduct.dom.amountWidget
       );
+      
       /* Nasłuchiwanie eventu. Drugą częścią informowania produktu, jak już wspomnieliśmy, jest nasłuchiwanie tego eventu w klasie Product. Co bowiem z tego, że event updated*/
       thisCartProduct.dom.amountWidget.addEventListener('updated', () => {
-        thisCartProduct.amount = thisCartProduct.amountWidget;
+        thisCartProduct.amount = thisCartProduct.amountWidget.value;
         thisCartProduct.price =
-          thisCartProduct.priceSingle * thisCartProduct.amount.value;
+          thisCartProduct.priceSingle * thisCartProduct.amount;
         // console.log(thisCartProduct.amount.value);
         // console.log(thisCartProduct.price);
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
@@ -685,14 +686,3 @@ Kiedy i ta operacja się zakończy, to wtedy (drugie .then) pokaż w konsoli te 
   }
   app.init();
 }
-// class DIW{
-//   constructor(element){
-//     const DIW = this;
-// const addElement = function(){
-//   const div = document.cerateElement('div');
-//   console.log('div', div);
-//       document.body.appendChild('div');
-// };
-// addEventListener('click', addElement);
-//   }
-// }
