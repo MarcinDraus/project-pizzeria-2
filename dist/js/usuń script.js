@@ -107,7 +107,7 @@
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
 
-      //console.log('new Product:', thisProduct);
+      //app      //console.log('new Product:', thisProduct);
     }
     renderInMenu() {
       const thisProduct = this;
@@ -341,7 +341,7 @@
         select.cart.totalNumber
       );
       thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
-      thisCart.dom.address =  thisCart.dom.wrapper.querySelector(select.cart.address);
+      thisCart.dom.address = thisCart.dom.wrapper.querySelector(select.cart.address);
       thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
     }
 
@@ -356,7 +356,7 @@
       thisCart.dom.productList.addEventListener('remove', function (event) {
         thisCart.remove(event.detail.cartProduct);
       });
-      thisCart.dom.form.addEventListener('submit', function(event){
+      thisCart.dom.form.addEventListener('submit', function (event) {
         event.preventDefault();
         thisCart.sendOrder();
       });
@@ -385,14 +385,14 @@
 
       thisCart.update();
     }
-    update(){
+    update() {
       const thisCart = this;
-  
+
       const deliveryFee = settings.cart.defaultDeliveryFee;
       thisCart.totalNumber = 0;
       thisCart.subtotalPrice = 0;
-      if (thisCart.products.length == 0){
-  
+      if (thisCart.products.length == 0) {
+
         thisCart.totalPrice = 0;
         thisCart.dom.deliveryFee.innerHTML = 0;
         thisCart.dom.subtotalPrice.innerHTML = 0;
@@ -401,12 +401,12 @@
         for (const cartProduct of thisCart.products) {
           thisCart.totalNumber += cartProduct.amount;
           thisCart.subtotalPrice += cartProduct.price;
-  
+
           thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
           thisCart.dom.deliveryFee.innerHTML = deliveryFee;
           thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
           thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
-  
+
         }
       }
       for (let totalpriceEl of thisCart.dom.totalPrice) {
@@ -418,7 +418,7 @@
     //   const deliveryFee = settings.cart.defaultDeliveryFee;
     //   thisCart.totalNumber = 0;
     //   thisCart.subtotalPrice = 0;
-      
+
     // for (const cartProduct of thisCart.products) {
     //   thisCart.totalNumber += cartProduct.amount;
     //   thisCart.subtotalPrice += cartProduct.price;
@@ -430,7 +430,7 @@
     //   thisCart.totalPrice = thisCart.subtotalPrice;
     //   thisCart.dom.deliveryFee.innerHTML = 0;
     // }
-      
+
     // thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
     // thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
 
@@ -439,19 +439,19 @@
     // }
     //}
     // send order to database on json server
-    sendOrder(){
+    sendOrder() {
       const thisCart = this;
       const url = settings.db.url + '/' + settings.db.orders;
       const payload = {
-        address:  thisCart.dom.address.value,
-        phone:  thisCart.dom.phone.value,
+        address: thisCart.dom.address.value,
+        phone: thisCart.dom.phone.value,
         totalPrice: thisCart.totalPrice,
         subtotalPrice: thisCart.subtotalPrice,
         totalNumber: thisCart.totalNumber,
         deliveryFee: settings.cart.defaultDeliveryFee,
         products: []
       };
-      for(let prod of thisCart.products) {
+      for (let prod of thisCart.products) {
         payload.products.push(prod.getData());
       }
       const options = {
@@ -461,7 +461,7 @@
         },
         body: JSON.stringify(payload),
       };
-      
+
       fetch(url, options);
     }
     // remove product from the cart
@@ -518,7 +518,7 @@
       thisCartProduct.amountWidget = new AmountWidget(
         thisCartProduct.dom.amountWidget
       );
-      
+
       /* Nasłuchiwanie eventu. Drugą częścią informowania produktu, jak już wspomnieliśmy, jest nasłuchiwanie tego eventu w klasie Product. Co bowiem z tego, że event updated*/
       thisCartProduct.dom.amountWidget.addEventListener('updated', () => {
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
@@ -554,7 +554,7 @@
         console.log(thisCartProduct.remove);
       });
     }
-    getData(){
+    getData() {
       const thisCartProduct = this;
       console.log(thisCartProduct);
 
@@ -575,6 +575,7 @@
       const cartElem = document.querySelector(select.containerOf.cart);
       thisApp.cart = new Cart(cartElem);
     },
+    
     initData: function () {
       const thisApp = this;
       //console.log('thisApp.data:', thisApp.data);
@@ -585,10 +586,10 @@
 Jeśli połączenie się zakończy, to wtedy (pierwsze .then) skonwertuj dane do obiektu JS-owego.
 Kiedy i ta operacja się zakończy, to wtedy (drugie .then) pokaż w konsoli te skonwertowane dane.*/
       fetch(url)
-        .then(function(rawResponse){
+        .then(function (rawResponse) {
           return rawResponse.json();
         })
-        .then(function(parsedResponse){
+        .then(function (parsedResponse) {
           console.log('parsedResponse', parsedResponse);
           //  save parsedResponse as thisApp.data.products
           thisApp.data.products = parsedResponse;
@@ -658,7 +659,7 @@ Kiedy i ta operacja się zakończy, to wtedy (drugie .then) pokaż w konsoli te 
         newValue <= settings.amountWidget.defaultMax
       ) {
         thisWidget.value =
-          newValue; 
+          newValue;
       }
       thisWidget.input.value = thisWidget.value;
       thisWidget.announce();
@@ -686,3 +687,4 @@ Kiedy i ta operacja się zakończy, to wtedy (drugie .then) pokaż w konsoli te 
   }
   app.init();
 }
+
