@@ -220,8 +220,8 @@ class Product {
         product: thisProduct.prepareCartProduct(),
       }
     });
-  
     thisProduct.element.dispatchEvent(event);
+    //thisProduct.element.dispatchEvent(event);
   }
 }
 export default Product;
