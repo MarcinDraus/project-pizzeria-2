@@ -1,7 +1,14 @@
 import { settings, select, classNames } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
+import Booking from './components/Booking.js';
 const app = {
+  initBooking: function(){
+    const thisApp = this;
+    thisApp.bookingContainer = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(thisApp.bookingContainer);
+
+  },
   initPages: function () {
     const thisApp = this;
     thisApp.pages = document.querySelector(select.containerOf.pages).children;//złapać <div id="pages"> i złapać wszystkie  dzieci czyli u nas <section id="order"> i <section id="booking">
@@ -97,7 +104,7 @@ const app = {
       new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
     }
   },
-
+  
   init: function () {
     const thisApp = this;
     console.log('*** App starting ***');
@@ -109,7 +116,9 @@ const app = {
     thisApp.initMenu();
     thisApp.initCart();
     thisApp.initPages();
+    thisApp.initBooking();
   },
+  
 };
 app.init();
 
