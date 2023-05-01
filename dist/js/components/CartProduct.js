@@ -16,14 +16,14 @@ class CartProduct {
     thisCartProduct.AmountWidget();
     thisCartProduct.initActions();
   
-    console.log('new CartProduct', thisCartProduct);
+    //console.log('new CartProduct', thisCartProduct);
   }
   getElements(element) {
     const thisCartProduct = this;
     thisCartProduct.dom = {};
   
     thisCartProduct.dom.wrapper = element;
-    console.log(thisCartProduct.dom.wrapper);
+    //console.log(thisCartProduct.dom.wrapper);
     thisCartProduct.dom.amountWidget =
           thisCartProduct.dom.wrapper.querySelector(
             select.cartProduct.amountWidget
@@ -77,12 +77,12 @@ class CartProduct {
       bin.preventDefault();
       thisCartProduct.remove();
       // eslint-disable-next-line no-undef
-      console.log(thisCartProduct.remove);
+      //console.log(thisCartProduct.remove);
     });
   }
   getData() {
     const thisCartProduct = this;
-    console.log(thisCartProduct);
+    //console.log(thisCartProduct);
   
     const cartProductSummary = {
       id: thisCartProduct.id,

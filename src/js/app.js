@@ -15,7 +15,7 @@ const app = {
     //w momencie otwarcia strony chcemy aby aktywowała sie pierwsza z postron i w tym celu uzyjemy metody activate pages będziemy przekazywać jej ID contenera podstrony.
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
     const idFromHash = window.location.hash.replace('#/', '');
-    console.log('idFromHash', idFromHash );
+    //console.log('idFromHash', idFromHash );
     //thisApp.activatePage(thisApp.pages[0].id);
     thisApp.activatePage(idFromHash);
     let pageMatchingHash = thisApp.pages[0].id;
@@ -25,7 +25,9 @@ const app = {
         pageMatchingHash = page.id;
         break;
       }
+      
     }
+
     //thisApp.activatePage(idFromHash);
     thisApp.activatePage(pageMatchingHash);
     
@@ -49,11 +51,11 @@ const app = {
     /* add class 'active' to matching PAGES, remove from non-matching */
     for(let page of thisApp.pages) {
       page.classList.toggle(classNames.pages.active, page.id == pageId);
-      //   if(page.Id == pageId){
-      //     page.classList.add(classNames.pages.active);
-      //   }else{
-      //     page.classList.remove(classList.pages.active);
-      //   }
+    //   if(page.Id == pageId){
+    //     page.classList.add(classNames.pages.active);
+    //   }else{
+    //     page.classList.remove(classNames.pages.active);
+    //   }
     }
     /* add class 'active' to matching LINKS, remove from non-matching */
     for(let link of thisApp.navLinks) {
@@ -88,7 +90,7 @@ const app = {
         return rawResponse.json();
       })
       .then(function (parsedResponse) {
-        console.log('parsedResponse', parsedResponse);
+        //console.log('parsedResponse', parsedResponse);
         //  save parsedResponse as thisApp.data.products
         thisApp.data.products = parsedResponse;
 
@@ -98,7 +100,7 @@ const app = {
   },
   initMenu: function () {
     const thisApp = this;
-    console.log('thisApp.data:', thisApp.data);
+    //console.log('thisApp.data:', thisApp.data);
 
     for (let productData in thisApp.data.products) {
       new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
@@ -117,6 +119,7 @@ const app = {
     thisApp.initCart();
     thisApp.initPages();
     thisApp.initBooking();
+   
   },
   
 };

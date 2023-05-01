@@ -8,7 +8,7 @@ class Cart {
     thisCart.getElements(element);
     // wysówa menu  koszyk z zamówieniem order
     thisCart.initActions();
-    console.log('new Cart', thisCart);
+    // console.log('new Cart', thisCart);
     thisCart.dom.form = select.cart.form;
   }
   getElements(element) {

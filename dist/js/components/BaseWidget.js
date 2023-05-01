@@ -52,17 +52,17 @@ class BaseWidget{
     const thisWidget = this;
   
     const event = new CustomEvent('updated', {
-      // add bubbles to enable event handling on parent element grandparent etc.
+    
       bubbles: true
     });
     thisWidget.dom.wrapper.dispatchEvent(event);
   }
-//   announce() {
-//     const thisWidget = this;
-//     //const event = new Event('updated');
-//     const event = new CustomEvent('updated', { bubbles: true });
-//     thisWidget.element.dispatchEvent(event);
-//   }
+  // announce() {
+  //   const thisWidget = this;
+  //   //const event = new Event('updated');
+  //   const event = new CustomEvent('updated', { bubbles: true });
+  //   thisWidget.element.dispatchEvent(event);
+  // }
 }
   
 export default BaseWidget;
