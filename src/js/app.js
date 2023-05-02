@@ -9,15 +9,43 @@ const app = {
     thisApp.booking = new Booking(thisApp.bookingContainer);
 
   },
+  // initPages: function(){
+  //   const thisApp = this;
+      
+  //   thisApp.pages = document.querySelector(select.containerOf.pages).children;
+
+  //   thisApp.navLinks = document.querySelectorAll(select.nav.links);
+
+  //   thisApp.activatePage(thisApp.pages[0].id);
+
+  //},
+  // activatePage: function(pageId){
+  //   const thisApp = this;
+  //   for(let page of thisApp.pages){
+        
+  //     page.classList.toggle(classNames.pages.active, page.id == pageId);
+          
+  //   }
+  //   //navLinks = document.querySelectorAll(select.nav.links);
+  //   for(let link of thisApp.navLinks){
+  //     link.classList.toggle(
+  //       classNames.nav.active,
+  //       link.getAttribute('href') == '#' + pageId
+  //     );
+  //   }
+  // },
+    
+  
   initPages: function () {
     const thisApp = this;
     thisApp.pages = document.querySelector(select.containerOf.pages).children;//złapać <div id="pages"> i złapać wszystkie  dzieci czyli u nas <section id="order"> i <section id="booking">
-    //w momencie otwarcia strony chcemy aby aktywowała sie pierwsza z postron i w tym celu uzyjemy metody activate pages będziemy przekazywać jej ID contenera podstrony.
+    // w momencie otwarcia strony chcemy aby aktywowała sie pierwsza z postron i w tym celu uzyjemy metody activate pages będziemy przekazywać jej ID contenera podstrony.
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+
     const idFromHash = window.location.hash.replace('#/', '');
     //console.log('idFromHash', idFromHash );
     //thisApp.activatePage(thisApp.pages[0].id);
-    thisApp.activatePage(idFromHash);
+    //thisApp.activatePage(idFromHash);
     let pageMatchingHash = thisApp.pages[0].id;
 
     for(let page of thisApp.pages){
@@ -29,10 +57,12 @@ const app = {
     }
 
     //thisApp.activatePage(idFromHash);
+
     thisApp.activatePage(pageMatchingHash);
     
     for(let link of thisApp.navLinks){
       link.addEventListener('click', function(event){
+        //const clickedElement = event.target;
         event.preventDefault();
         const clickedElement  = this;
         //get page id from href attribute
@@ -50,12 +80,12 @@ const app = {
             
     /* add class 'active' to matching PAGES, remove from non-matching */
     for(let page of thisApp.pages) {
-      page.classList.toggle(classNames.pages.active, page.id == pageId);
-    //   if(page.Id == pageId){
-    //     page.classList.add(classNames.pages.active);
-    //   }else{
-    //     page.classList.remove(classNames.pages.active);
-    //   }
+      page.classList.toggle(classNames.pages.active, page.id === pageId);
+      // if(page.Id == pageId){
+      //   page.classList.add(classNames.pages.active);
+      // }else{
+      //   page.classList.remove(classNames.pages.active);
+      // }
     }
     /* add class 'active' to matching LINKS, remove from non-matching */
     for(let link of thisApp.navLinks) {
@@ -109,11 +139,13 @@ const app = {
   
   init: function () {
     const thisApp = this;
-    console.log('*** App starting ***');
-    console.log('thisApp:', thisApp);
+    //console.log('*** App starting ***');
+    //console.log('thisApp:', thisApp);
     //console.log('classNames:', classNames);
-    console.log('settings:', settings);
+    //console.log('settings:', settings);
     //console.log('templates:', templates);
+    //thisApp.initPages();
+    //thisApp.activatePage();
     thisApp.initData();
     thisApp.initMenu();
     thisApp.initCart();
