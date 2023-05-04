@@ -1,4 +1,4 @@
-import {templates,  select} from '../settings.js';
+import settings, {templates,  select, /*settings*/} from '../settings.js';
 import utils from '../utils.js';
 import AmountWidget from '../components/AmountWidget.js';
 import DatePicker from '../components/DatePicker.js';
@@ -8,8 +8,31 @@ class Booking{
     const thisBooking = this;
     thisBooking.render(element);
     thisBooking.initWidgets();
-  
+    //thisBooking.getData();
   }
+  // getData(){
+  //   const thisBooking = this;
+  //   const params = {
+  //     booking:[
+  //       settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePicker.minDate),
+  //       settings.db.dateEndParamKey + '=' + utils.dateToStr(thisBooking.datePicker.maxDate),
+  //     ],
+  //     eventsCurrent:[
+
+  //     ],
+  //     eventsRepeat:[
+
+  //     ],
+  //   }
+  //   console.log(params,'params');
+  //   const urls = {
+  //    //booking:        settings.db.url + '/' + settings.db.booking + '?' +  params.booking.join('&')
+  //    //eventsCurrent:  settings.db.url + '/' + settings.db.event   + '?' +  params.eventsCurrent.join('&')
+  //    //eventsRepeat:   settings.db.url + '/' + settings.db.event   + '?' +  params.eventsRepeat.join('&')
+  //   };
+            
+  // }
+  
   render(element){
     const thisBooking = this;
     

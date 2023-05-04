@@ -139,6 +139,7 @@ export const templates = {
     document.querySelector(select.templateOf.cartProduct).innerHTML
   ),
   // CODE ADDED END
-  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
+  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML
+  ),
 };
 export default settings;
