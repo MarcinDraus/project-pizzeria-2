@@ -1,4 +1,4 @@
-import settings, {templates,  select, /*settings*/} from '../settings.js';
+import {templates,  select, /*settings*/} from '../settings.js';
 import utils from '../utils.js';
 import AmountWidget from '../components/AmountWidget.js';
 import DatePicker from '../components/DatePicker.js';
