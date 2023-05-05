@@ -116,16 +116,14 @@ export const settings = {
   db: {
     url: '//localhost:3131',
     products: 'products',
+    homepage: 'homepage',
     orders: 'orders',
-    //url: '//localhost:3131',
-    product: 'product',
-    order: 'order',
-    booking: 'booking',
-    event: 'event',
+    bookings: 'bookings',
+    events: 'events',
     dateStartParamKey: 'date_gte',
     dateEndParamKey: 'date_lte',
     notRepeatParam: 'repeat=false',
-    repeatParam: 'repeat_ne=false',
+    repeatParam: 'repeat_ne=false'
   },
   // CODE ADDED END
   
