@@ -275,51 +275,30 @@
       "starters": []
     },
     {
-      "date": "2023-05-05",
+      "date": "2023-05-19",
       "hour": "12:00",
       "table": 2,
       "duration": 1,
-      "ppl": 1,
-      "starters": [],
+      "ppl": 2,
+      "starters": [
+        "water"
+      ],
       "phone": "",
       "address": "",
       "id": 2
     },
     {
-      "date": "2023-05-05",
-      "hour": "16:30",
-      "table": 3,
-      "duration": 1,
-      "ppl": 1,
-      "starters": [],
-      "phone": "",
-      "address": "",
-      "id": 3
-    },
-    {
       "date": "2023-05-19",
-      "hour": "20:00",
-      "table": 1,
-      "duration": 2,
-      "ppl": 2,
-      "starters": [],
-      "phone": "",
-      "address": "",
-      "id": 4
-    },
-    {
-      "date": "2023-05-18",
-      "hour": "20:00",
-      "table": 1,
-      "duration": 2,
+      "hour": "12:00",
+      "table": 2,
+      "duration": 1,
       "ppl": 2,
       "starters": [
-        "water",
-        "bread"
+        "water"
       ],
       "phone": "",
       "address": "",
-      "id": 5
+      "id": 3
     }
   ]
 }

@@ -3,6 +3,7 @@ export const select = {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product', // CODE ADDED
     bookingWidget: '#template-booking-widget',//10.4
+    homepage: '#template-homepage-widget',//home
   },
   containerOf: {
     menu: '#product-list',
@@ -10,6 +11,8 @@ export const select = {
     pages: '#pages',//10.4
     booking: '.booking-wrapper',//10.4
     tables: '.floor-plan',
+    homepage: '.home-wrapper',//home
+    carousel: '.main-carousel',//home/carousel
   },
   all: {
     menuProducts: '#product-list > .product',
@@ -124,7 +127,7 @@ export const settings = {
   db: {
     url: '//localhost:3131',
     products: 'products',
-    homepage: 'homepage',
+    homepage: 'homepage',//home
     orders: 'orders',
     bookings: 'bookings',
     events: 'events',
@@ -147,5 +150,35 @@ export const templates = {
   // CODE ADDED END
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML
   ),
+  homepage: Handlebars.compile(document.querySelector(select.templateOf.homepage).innerHTML
+  ),
 };
+// export const dataSource = {};
+// dataSource.image =[
+//   {
+//     id: 1,
+//     image: './images/home/pizza-1.jpg',
+//   },
+//   {
+//     id: 2,
+//     image: './images/home/pizza-2.jpg',
+//   },
+//   {
+//     id: 3,
+//     image: './images/home/pizza-3.jpg',
+//   },
+//   {
+//     id: 4,
+//     image: './images/home/pizza-4.jpg',
+//   },
+//   {
+//     id: 5,
+//     image: './images/home/pizza-5.jpg',
+//   },
+//   {
+//     id: 6,
+//     image: './images/home/pizza-6.jpg',
+//   },
+// ];
+
 export default settings;

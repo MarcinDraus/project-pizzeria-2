@@ -9,6 +9,9 @@
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="./vendor/range-slider.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <link rel="stylesheet" href="vendor/flickity.css" media="screen">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -20,6 +23,7 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#home">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
         </div>
@@ -62,6 +66,9 @@
 
   <!--<div id="product-list" class="product-list container"></div>-->
   <div id="pages">
+    <section id="home">
+			<div class="home-wrapper container"></div>
+			</section>	
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -69,6 +76,90 @@
       <div class="booking-wrapper container"></div>
     </section>
   </div>
+ <!--home handlebars template-->
+ <script id="template-homepage-widget" type="text/x-handlebars-template">
+   <div class="home">
+    <div class="home_bat">
+      <div class="home_row">
+        <div class="action">
+          <img src="./images/home/pizza-1.jpg">
+          <a href="#order" class="image-link"></a>
+          </img>
+          <h3>ORDER ONLINE</h3>
+        </div>
+        <div class="action">
+          <img src="./images/home/pizza-2.jpg"></img>
+          <h3>BOOK A TABLE</h3>
+        </div>
+      </div>
+    
+      <div class="info">
+        <div class="open_hours">
+        <h2>OPENING HOURS</h2>
+        <p>TUE-SUN, 12PM - 12AM</p>
+        </div>
+    </div>
+
+    <!--home carousel-->
+    <div class="main-carousel">
+      <div class="carousel-cell">
+        <div>
+          <img src="images/home/pizza-3.jpg" alt="">
+        </div>
+        <div class="comment-container">
+          <h5 class="cell-title">AMAZING SERVICE!</h5>
+        <p class="comment">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+        <p class="comment-author">-Madelaine Crowning</p>
+        </div>
+        
+      </div>
+      <div class="carousel-cell">
+        <div>
+          <img src="images/home/pizza-3.jpg" alt="">
+        </div>
+        <div class="comment-wrapper">
+          <h5 class="cell-title">GREAT FOOD!</h5>
+        <p class="comment">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+        <p class="comment-author">-James Whithlok</p>
+        </div>
+      </div>
+      <div class="carousel-cell">
+        <div>
+          <img src="images/home/pizza-3.jpg" alt="People">
+        </div>
+        <div class="comment-container">
+          <h5 class="cell-title">WONDERFUL PLACE!</h5>
+          <p class="comment">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+          <p class="comment-author">-Anna Rainbow</p>
+        </div>
+      </div>
+      <div class="carousel-cell">
+        <div>
+          <img src="images/home/pizza-3.jpg" alt="">
+        </div>
+        <div class="comment-container">
+          <h5 class="cell-title">GREAT VENUE!</h5>
+          <p class="comment">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+          <p class="comment-author">-Matt Cloud</p>
+      </div>
+    </div>
+    
+
+    <!--home gallery-->
+    <div class="home__gallery">
+         {{#each images}}
+					<div class="card">
+						<div class="card-overlay"></div>
+						 <img src="{{ this }}" alt="gallery">
+						  <div class="icons-wrapper">
+							  <i class="fas fa-heart"></i>
+							  <i class="fas fa-share-alt"></i>						
+						  </div>
+					</div>
+					{{/each}}
+    </div>
+ </script>
+
   <script id="template-cart-product" type="text/x-handlebars-template">
     <li>
       <div class="widget-amount"> <!-- widget-amount -->
@@ -246,6 +337,10 @@
  <!-- <script src="js/script.js"></script> -->
  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
  <script src="./vendor/range-slider.min.js"></script>
+ <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+ <script src="https://kit.fontawesome.com/fa1266ce3e.js" crossorigin="anonymous"></script>
+  <script src="vendor/flickity.pkgd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="js/app.js" type="module"></script>
 </body>
 </html>
