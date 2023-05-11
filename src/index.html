@@ -68,7 +68,7 @@
   <div id="pages">
     <section id="home">
 			<div class="home-wrapper container"></div>
-			</section>	
+    </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -89,6 +89,7 @@
         </div>
         <div class="action">
           <img src="./images/home/pizza-2.jpg"></img>
+          <a href="#booking" class="image-link"></a>
           <h3>BOOK A TABLE</h3>
         </div>
       </div>
@@ -143,14 +144,14 @@
           <p class="comment-author">-Matt Cloud</p>
       </div>
     </div>
-    
+  </div>
 
     <!--home gallery-->
-    <div class="home__gallery">
-         {{#each images}}
+    <div class="home_gallery">
+         {{#each image}}
 					<div class="card">
 						<div class="card-overlay"></div>
-						 <img src="{{ this }}" alt="gallery">
+						 <img src="{{homeimages }}" alt="gallery">
 						  <div class="icons-wrapper">
 							  <i class="fas fa-heart"></i>
 							  <i class="fas fa-share-alt"></i>						

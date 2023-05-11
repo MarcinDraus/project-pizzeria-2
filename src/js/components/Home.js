@@ -1,10 +1,11 @@
-import { templates, select,/* dataSource,*/ } from '../settings.js';
+import { templates, select,  dataSource } from '../settings.js';
 import utils from '../utils.js';
 class Home {
   constructor(element) {
     const thisHome = this;
     thisHome.render(element);
     thisHome.carousel();
+    thisHome. gallery();
   }
   render(element) {
     const thisHome = this;
@@ -25,8 +26,15 @@ class Home {
       imagesLoaded: true,
       percentPosition: false,
     });
+  }
+  gallery(){
 
+    const tplProductListSource = document.getElementById('#template-product-list').innerHTML;
+    const tplProductList = Handlebars.compile(tplProductListSource);
+    
 
+    generatedHTML = tplProductList(dataSource.image);
+    targetElement.insertAdjacentHTML('beforeend', generatedHTML);
   }
 }
 export default Home;

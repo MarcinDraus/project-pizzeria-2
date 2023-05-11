@@ -79,6 +79,11 @@ export const select = {
   },
   // CODE ADDED END
   
+  homepage: {
+    cta: '.home__cta',
+    quotes: '.home__quotes',
+    gallery: '.home__gallery',
+  },  //home
 };
   
 export const classNames = {
@@ -153,32 +158,33 @@ export const templates = {
   homepage: Handlebars.compile(document.querySelector(select.templateOf.homepage).innerHTML
   ),
 };
-// export const dataSource = {};
-// dataSource.image =[
-//   {
-//     id: 1,
-//     image: './images/home/pizza-1.jpg',
-//   },
-//   {
-//     id: 2,
-//     image: './images/home/pizza-2.jpg',
-//   },
-//   {
-//     id: 3,
-//     image: './images/home/pizza-3.jpg',
-//   },
-//   {
-//     id: 4,
-//     image: './images/home/pizza-4.jpg',
-//   },
-//   {
-//     id: 5,
-//     image: './images/home/pizza-5.jpg',
-//   },
-//   {
-//     id: 6,
-//     image: './images/home/pizza-6.jpg',
-//   },
-// ];
+export const dataSource = {};
+dataSource.image =[
+  {
+    id: 1,
+    image: './images/home/pizza-1.jpg',
+  },
+  {
+    id: 2,
+    image: './images/home/pizza-2.jpg',
+  },
+  {
+    id: 3,
+    image: './images/home/pizza-3.jpg',
+  },
+  {
+    id: 4,
+    image: './images/home/pizza-4.jpg',
+  },
+  {
+    id: 5,
+    image: './images/home/pizza-5.jpg',
+  },
+  {
+    id: 6,
+    image: './images/home/pizza-6.jpg',
+  },
+];
+
 
 export default settings;
