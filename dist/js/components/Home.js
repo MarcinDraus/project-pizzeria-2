@@ -5,12 +5,12 @@ class Home {
     const thisHome = this;
     thisHome.render(element);
     thisHome.carousel();
-    thisHome. gallery();
+    
   }
   render(element) {
     const thisHome = this;
 
-    const generatedHTML = utils.createDOMFromHTML(templates.homepage());//homepage: '#template-homepage-widget',
+    const generatedHTML = utils.createDOMFromHTML(templates.homepage(dataSource));//homepage: '#template-homepage-widget',
     thisHome.dom = {};
     thisHome.dom.wrapper = element;
     thisHome.dom.wrapper.appendChild(generatedHTML);
@@ -27,14 +27,6 @@ class Home {
       percentPosition: false,
     });
   }
-  gallery(){
 
-    const tplProductListSource = document.getElementById('#template-product-list').innerHTML;
-    const tplProductList = Handlebars.compile(tplProductListSource);
-    
-
-    generatedHTML = tplProductList(dataSource.image);
-    targetElement.insertAdjacentHTML('beforeend', generatedHTML);
-  }
 }
 export default Home;

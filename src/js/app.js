@@ -67,7 +67,7 @@ const app = {
     for(let link of thisApp.navLinks){
       link.addEventListener('click', (event)=>{
 
-        const clickedElement = event.target;
+        const clickedElement = event.currentTarget;
         event.preventDefault();
        
 
@@ -216,9 +216,9 @@ const app = {
     thisApp.initData();
     thisApp.initMenu();
     thisApp.initCart();
+    thisApp.initHome();
     thisApp.initPages();
     thisApp.initBooking();
-    thisApp.initHome();
   },
   
 };

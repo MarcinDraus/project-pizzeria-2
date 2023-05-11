@@ -55,7 +55,7 @@ export const select = {
     starters: 'input[name="starter"]',
   },
   nav: {
-    links: '.main-nav a',
+    links: '.main-nav a, .image-link',
   },
   // CODE ADDED START
   cart: {
@@ -159,7 +159,7 @@ export const templates = {
   ),
 };
 export const dataSource = {};
-dataSource.image =[
+dataSource.images =[
   {
     id: 1,
     image: './images/home/pizza-1.jpg',

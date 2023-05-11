@@ -78,20 +78,21 @@
   </div>
  <!--home handlebars template-->
  <script id="template-homepage-widget" type="text/x-handlebars-template">
-   <div class="home">
+   <div class="home_battons">
     <div class="home_bat">
       <div class="home_row">
-        <div class="action">
-          <img src="./images/home/pizza-1.jpg">
-          <a href="#order" class="image-link"></a>
-          </img>
-          <h3>ORDER ONLINE</h3>
-        </div>
-        <div class="action">
-          <img src="./images/home/pizza-2.jpg"></img>
-          <a href="#booking" class="image-link"></a>
-          <h3>BOOK A TABLE</h3>
-        </div>
+        <a href="#order" class="image-link">
+          <div class="action">
+            <img src="./images/home/pizza-1.jpg">
+            <h3>ORDER ONLINE</h3>
+          </div>
+        </a>
+        <a href="#booking" class="image-link">
+          <div class="action">
+            <img src="./images/home/pizza-2.jpg">
+            <h3>BOOK A TABLE</h3>
+          </div>
+        </a>
       </div>
     
       <div class="info">
@@ -148,16 +149,16 @@
 
     <!--home gallery-->
     <div class="home_gallery">
-         {{#each image}}
+         {{#each images}}
 					<div class="card">
-						<div class="card-overlay"></div>
-						 <img src="{{homeimages }}" alt="gallery">
+						
+						 <img src="{{this.image}}" alt="gallery">
 						  <div class="icons-wrapper">
 							  <i class="fas fa-heart"></i>
 							  <i class="fas fa-share-alt"></i>						
 						  </div>
 					</div>
-					{{/each}}
+				 {{/each}}
     </div>
  </script>
 
