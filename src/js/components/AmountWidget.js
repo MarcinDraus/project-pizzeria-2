@@ -5,7 +5,7 @@ class AmountWidget extends BaseWidget{
   constructor(element) {
     super(element, settings.amountWidget.defaultValue);
     const thisWidget = this;
-    thisWidget.getElements(element);
+    thisWidget.getElements()/*(element)*/;
   
     //thisWidget.value = settings.amountWidget.defaultValue;
     /*Gdy produkt generuje swój HTML, to w inpucie od razu wstawia nam domyślną wartość.Chodzi o to, żeby nawet na samym starcie, kiedy nikt jeszcze nie zmienił wartości w inpucie, nasza instancja miała już informację co w tym inpucie jest */
@@ -73,12 +73,12 @@ class AmountWidget extends BaseWidget{
     //thisWidget.linkDecrease.addEventListener('click', (event) => {
     thisWidget.dom.linkDecrease.addEventListener('click', (event)=>{
       event.preventDefault();
-      thisWidget.setValue(thisWidget.imput.value - 1);
+      thisWidget.setValue(parseInt(thisWidget.value) - 1);/*(thisWidget.input.value - 1);*/
     });
     //thisWidget.linkIncrease.addEventListener('click', (event) => {
     thisWidget.dom.linkIncrease.addEventListener('click', (event)=>{
       event.preventDefault();
-      thisWidget.setValue(thisWidget.value + 1);
+      thisWidget.setValue(parseInt(thisWidget.value) + 1);/*(thisWidget.value + 1);*/
     });
   }
   

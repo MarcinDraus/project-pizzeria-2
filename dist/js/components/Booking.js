@@ -31,14 +31,14 @@ class Booking {
         settings.db.notRepeatParam, endDateParam,
       ],
     };
-    console.log('getData params', params);
+    //console.log('getData params', params);
     const urls = {
       booking: settings.db.url + '/' + settings.db.bookings + '?' + params.booking.join('&'),
       eventsCurrent: settings.db.url + '/' + settings.db.events + '?' + params.eventsCurrent.join('&'),
       eventsRepeat: settings.db.url + '/' + settings.db.events + '?' + params.eventsRepeat.join('&'),
     };
-    console.log(params, 'params');
-    console.log(urls, 'urls');
+    //console.log(params, 'params');
+    //console.log(urls, 'urls');
     Promise.all([
       fetch(urls.booking),
       fetch(urls.eventsCurrent),
@@ -94,7 +94,7 @@ class Booking {
     const startHour = utils.hourToNumber(hour);
 
     for (let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5) {
-      console.log('loop', hourBlock);
+      //console.log('loop', hourBlock);
       if (typeof thisBooking.booked[date][hourBlock] == 'undefined') {
         thisBooking.booked[date][hourBlock] = [];
       }
@@ -123,7 +123,7 @@ class Booking {
       // console.log('selected table', thisBooking.selectedTable);
       //table
       table.classList.remove(classNames.booking.tableSelected);
-      console.log('selected table', thisBooking.selectedTable);//table
+      //console.log('selected table', thisBooking.selectedTable);//table
 
       if (!isNaN(tableId)) {
         tableId = parseInt(tableId);
@@ -157,20 +157,20 @@ class Booking {
       else if (clickedElement.classList.contains(classNames.booking.tableSelected)){
         clickedElement.classList.remove(classNames.booking.tableSelected);
         thisBooking.selectedTable = null;
-        console.log('remove from thisBooking.selectedTable', thisBooking.selectedTable);
+        //console.log('remove from thisBooking.selectedTable', thisBooking.selectedTable);
       }
       else {
         // remove selected class from other tables
         for(let table of thisBooking.dom.tables){
           table.classList.remove(classNames.booking.tableSelected);
-          console.log('removed class selected from all tables');
+          //console.log('removed class selected from all tables');
 
         }
         // if table is not selected add selected class
 
         clickedElement.classList.add(classNames.booking.tableSelected);
         thisBooking.selectedTable = selectedId;
-        console.log('added to thisBooking.selectedTable', thisBooking.selectedTable);
+        //console.log('added to thisBooking.selectedTable', thisBooking.selectedTable);
       }
     }
   

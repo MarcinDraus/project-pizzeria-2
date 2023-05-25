@@ -61,7 +61,7 @@ const app = {
         
       }
     }
-    console.log('pageMatchingHash2', pageMatchingHash);
+    //console.log('pageMatchingHash2', pageMatchingHash);
     thisApp.activatePage(pageMatchingHash);
     
     for(let link of thisApp.navLinks){
@@ -73,10 +73,10 @@ const app = {
 
         // get page ID from href attr.
         const id = clickedElement.getAttribute('href').replace('#', '');
-        console.log(clickedElement,'clickedElement');
+        //console.log(clickedElement,'clickedElement');
         // run thisApp.activatePage() with ID
         thisApp.activatePage(id);
-        console.log(id, 'id');
+        //console.log(id, 'id');
         // change URL hash, add / to prevent scrolling to #
 
         window.location.hash = '#/' + id;
@@ -93,7 +93,7 @@ const app = {
     for(let page of thisApp.pages) {
       page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
-    console.log('pageId',pageId);
+    //console.log('pageId',pageId);
     /* add class 'active' to matching LINKS, remove from non-matching */
     for(let link of thisApp.navLinks) {
       link.classList.toggle(
